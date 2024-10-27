@@ -1,0 +1,11 @@
+# Ignore system and editor files
+.cache/
+.config/
+.local/
+.ssh/
+.bash_history
+.mysql_history
+.bash_logout
+.bashrc
+.profile
+.vscode-server/
