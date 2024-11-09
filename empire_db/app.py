@@ -14,7 +14,7 @@ load_dotenv()
 
 app = Flask(__name__)
 
-# Database connection using environment variables
+# Database connection function
 
 def get_db_connection():
 
@@ -30,7 +30,7 @@ def get_db_connection():
 
     )
 
-# Route to display table data
+# Read: Display table data
 
 @app.route('/')
 
@@ -48,13 +48,11 @@ def index():
 
     return render_template('index.html', persons=persons)
 
-# Route to handle form submission
+# Create: Handle form submission for new data
 
 @app.route('/add_person', methods=['POST'])
 
 def add_person():
-
-    # Escape user input to prevent XSS and use parameterized query to prevent SQL injection
 
     first_name = escape(request.form['first_name'])
 
@@ -86,8 +84,82 @@ def add_person():
 
     return redirect(url_for('index'))
 
-# Start the Flask server with python3 app.py
+# Update: Load form with pre-filled data for editing
+
+@app.route('/edit_person/<int:person_id>', methods=['GET', 'POST'])
+
+def edit_person(person_id):
+
+    conn = get_db_connection()
+
+    cursor = conn.cursor(dictionary=True)
+
+    
+
+    if request.method == 'POST':
+
+        # Update data
+
+        first_name = escape(request.form['first_name'])
+
+        last_name = escape(request.form['last_name'])
+
+        age = request.form['age']
+
+        rank_id = request.form['rank_id']
+
+        specialization_id = request.form['specialization_id']
+
+        
+
+        cursor.execute(
+
+            "UPDATE Person SET FirstName = %s, LastName = %s, Age = %s, RankID = %s, SpecializationID = %s WHERE PersonID = %s",
+
+            (first_name, last_name, age, rank_id, specialization_id, person_id)
+
+        )
+
+        conn.commit()
+
+        conn.close()
+
+        return redirect(url_for('index'))
+
+    else:
+
+        # Load data for pre-filling the form
+
+        cursor.execute("SELECT * FROM Person WHERE PersonID = %s", (person_id,))
+
+        person = cursor.fetchone()
+
+        conn.close()
+
+        return render_template('edit_person.html', person=person)
+
+# Delete: Remove a specific row
+
+@app.route('/delete_person/<int:person_id>', methods=['POST'])
+
+def delete_person(person_id):
+
+    conn = get_db_connection()
+
+    cursor = conn.cursor()
+
+    cursor.execute("DELETE FROM Person WHERE PersonID = %s", (person_id,))
+
+    conn.commit()
+
+    conn.close()
+
+    return redirect(url_for('index'))
+
+# Start the Flask server
 
 if __name__ == '__main__':
 
     app.run(debug=True)
+
+
