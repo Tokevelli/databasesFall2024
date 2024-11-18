@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>People</title>
+</head>
+<body>
+    <h1>People</h1>
+    <ul>
+        {% for person in people %}
+            <li><a href="{{ url_for('person_assignments', person_id=person['PersonID']) }}">{{ person['FirstName'] }} {{ person['LastName'] }}</a></li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('add_assignment') }}">Add New Assignment</a>
+    <a href="{{ url_for('index') }}">Return to Main Page</a>
+</body>
+</html>

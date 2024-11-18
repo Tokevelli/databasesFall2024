@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ person['FirstName'] }}'s Assignments</title>
+</head>
+<body>
+    <h1>Assignments for {{ person['FirstName'] }} {{ person['LastName'] }}</h1>
+    <ul>
+        {% for assignment in assignments %}
+        <li>
+            {{ assignment['PlanetName'] }} - From {{ assignment['StartDate'] }} to {{ assignment['EndDate'] }}
+            <!-- Link to view all people assigned to the same location -->
+            (<a href="{{ url_for('location_assignments', location_id=assignment['LocationID']) }}">View Others</a>)
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('index') }}">Return to Main Page</a>
+</body>
+</html>
+

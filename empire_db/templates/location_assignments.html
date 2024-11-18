@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ location['PlanetName'] }} Assignments</title>
+</head>
+<body>
+    <h1>People Assigned to {{ location['PlanetName'] }}</h1>
+    <ul>
+        {% for person in people %}
+            <li>{{ person['FirstName'] }} {{ person['LastName'] }} - From {{ person['StartDate'] }} to {{ person['EndDate'] }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('list_people') }}">Back to People</a>
+    <a href="{{ url_for('index') }}">Return to Main Page</a>
+</body>
+</html>
