@@ -35,6 +35,10 @@ def add_person():
     age = request.form['age']
     rank_id = request.form['rank_id']
     specialization_id = request.form['specialization_id']
+
+    location_id = request.form['location_id']
+    start_date = request.form['start_date']
+    end_date = request.form['end_date']
     
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -42,6 +46,13 @@ def add_person():
         "INSERT INTO Person (FirstName, LastName, Age, RankID, SpecializationID) VALUES (%s, %s, %s, %s, %s)",
         (first_name, last_name, age, rank_id, specialization_id)
     )
+    person_id = cursor.lastrowid
+   
+    cursor.execute(
+        "INSERT INTO Assignment (PersonID, LocationID, StartDate, EndDate) VALUES (%s, %s, %s, %s)",
+        (person_id, location_id, start_date, end_date)
+    )
+
     conn.commit()
     conn.close()
     return redirect(url_for('index'))
