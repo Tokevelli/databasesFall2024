@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit Person</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <h1>Edit Person</h1>
@@ -27,8 +28,8 @@
 
     <!-- Link to view or update assignments -->
     <h2>Manage Assignments</h2>
-    <a href="{{ url_for('person_assignments', person_id=person['PersonID']) }}">View Assignments</a>
-    <a href="{{ url_for('index') }}">Return to Main Page</a>
+    <a href="{{ url_for('person_assignments', person_id=person['PersonID']) }}" class="button">View Assignments</a>
+    <a href="{{ url_for('index') }}" class="button">Return to Main Page</a>
 </body>
 </html>
 

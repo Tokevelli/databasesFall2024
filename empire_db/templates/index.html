@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Person Table</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <h1>Person Table</h1>
@@ -24,10 +25,10 @@
             <td>{{ person['SpecializationID'] }}</td>
             <td>
                 <!-- Link to view assignments for the person -->
-                <a href="{{ url_for('person_assignments', person_id=person['PersonID']) }}">View Assignments</a>
+                <a href="{{ url_for('person_assignments', person_id=person['PersonID']) }}" class="button">View Assignments</a>
                 
                 <!-- Edit and delete buttons -->
-                <a href="{{ url_for('edit_person', person_id=person['PersonID']) }}">Edit</a>
+                <a href="{{ url_for('edit_person', person_id=person['PersonID']) }}" class="button">Edit</a>
                 <form action="{{ url_for('delete_person', person_id=person['PersonID']) }}" method="post" style="display:inline;">
                     <button type="submit">Delete</button>
                 </form>
@@ -37,11 +38,11 @@
     </table>
 
     <h2>Add a New Person</h2>
-    <a href="{{ url_for('add_person_form') }}">Add a New Person</a>
+    <a href="{{ url_for('add_person_form') }}" class="button">Add a New Person</a>
 
     <h2>Manage Assignments</h2>
     <!-- Link to list all people -->
-    <a href="{{ url_for('list_people') }}">Manage People and Assignments</a>
+    <a href="{{ url_for('list_people') }}" class="button">Manage People and Assignments</a>
 </body>
 </html>
 

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Add a New Person</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <h1>Add a New Person</h1>
@@ -36,6 +37,6 @@
 
         <button type="submit">Add Person and Assignment</button>
     </form>
-    <a href="{{ url_for('index') }}">Return to Main Page</a>
+    <a href="{{ url_for('index') }}" class="button">Return to Main Page</a>
 </body>
 </html>

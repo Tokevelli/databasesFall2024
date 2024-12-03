@@ -1,0 +1,119 @@
+/* h1 header styling */
+h1 {
+    font-family: 'Roboto Slab', serif;
+    font-size: 3.5em;
+    color: #333; 
+    text-align: center; 
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    border-bottom: 3px solid #007bff; 
+    padding-bottom: 10px; 
+}
+
+h1:hover {
+    color: #007bff; /* Change text color on hover */
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3); /* Intensify shadow */
+    cursor: default; /* Keeps pointer as default for non-clickable headers */
+}
+
+
+/* General styling for the body */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Style for table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 18px;
+    text-align: left;
+}
+
+table th, table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+}
+
+table th {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Style for buttons */
+button {
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #007bff;
+    border: 2px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Style for links */
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Style for forms */
+form {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+form input, form button {
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 16px;
+    width: 100%;
+    max-width: 250px;
+}
+
+/* Style for link buttons */
+.button {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 14px;
+    color: white;
+    background-color: #007bff;
+    text-decoration: none;
+    border: 2px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+/* Style for the dropdowns */
+select {
+    width: auto; 
+    max-width: 300px; 
+    padding: 5px; 
+    font-size: 16px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    background-color: white; 
+}
+
