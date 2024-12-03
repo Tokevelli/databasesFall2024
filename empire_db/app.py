@@ -28,34 +28,44 @@ def index():
     conn.close()
     return render_template('index.html', persons=persons)
 
+@app.route('/add_person_form')
+def add_person_form():
+    return render_template('add_person.html')
+
 @app.route('/add_person', methods=['POST'])
 def add_person():
+    # Extract person details from the form
     first_name = escape(request.form['first_name'])
     last_name = escape(request.form['last_name'])
     age = request.form['age']
     rank_id = request.form['rank_id']
     specialization_id = request.form['specialization_id']
 
+    # Extract assignment details from the form
     location_id = request.form['location_id']
     start_date = request.form['start_date']
     end_date = request.form['end_date']
-    
+
     conn = get_db_connection()
     cursor = conn.cursor()
+
+    # Insert the new person into the Person table
     cursor.execute(
         "INSERT INTO Person (FirstName, LastName, Age, RankID, SpecializationID) VALUES (%s, %s, %s, %s, %s)",
         (first_name, last_name, age, rank_id, specialization_id)
     )
-    person_id = cursor.lastrowid
-   
+    person_id = cursor.lastrowid  # Get the auto-generated PersonID of the new person
+
+    # Insert the assignment into the Assignment table
     cursor.execute(
         "INSERT INTO Assignment (PersonID, LocationID, StartDate, EndDate) VALUES (%s, %s, %s, %s)",
         (person_id, location_id, start_date, end_date)
     )
 
-    conn.commit()
+    conn.commit()  # Commit both transactions
     conn.close()
     return redirect(url_for('index'))
+
 
 @app.route('/edit_person/<int:person_id>', methods=['GET', 'POST'])
 def edit_person(person_id):
