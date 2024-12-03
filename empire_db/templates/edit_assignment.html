@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Assignment</title>
+</head>
+<body>
+    <h1>Edit Assignment</h1>
+    <form action="{{ url_for('edit_assignment', assignment_id=assignment['AssignmentID']) }}" method="post">
+        <label for="start_date">Start Date:</label>
+        <input type="date" name="start_date" value="{{ assignment['StartDate'] }}" required><br>
+
+        <label for="end_date">End Date:</label>
+        <input type="date" name="end_date" value="{{ assignment['EndDate'] }}"><br>
+
+        <button type="submit">Update Assignment</button>
+    </form>
+    <a href="{{ url_for('list_people') }}">Cancel</a>
+</body>
+</html>

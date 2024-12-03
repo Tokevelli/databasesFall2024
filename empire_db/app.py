@@ -110,7 +110,7 @@ def person_assignments(person_id):
     cursor.execute("SELECT * FROM Person WHERE PersonID = %s", (person_id,))
     person = cursor.fetchone()
     cursor.execute("""
-        SELECT Location.PlanetName, Assignment.StartDate, Assignment.EndDate, Assignment.LocationID
+        SELECT Assignment.AssignmentID, Location.PlanetName, Assignment.StartDate, Assignment.EndDate, Assignment.LocationID
         FROM Assignment
         JOIN Location ON Assignment.LocationID = Location.LocationID
         WHERE Assignment.PersonID = %s
@@ -160,6 +160,39 @@ def add_assignment():
         locations = cursor.fetchall()
         conn.close()
         return render_template('add_assignment.html', people=people, locations=locations)
+
+# Delete Assignment Function
+@app.route('/delete_assignment/<int:assignment_id>', methods=['POST'])
+def delete_assignment(assignment_id):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM Assignment WHERE AssignmentID = %s", (assignment_id,))
+    conn.commit()
+    conn.close()
+    return redirect(url_for('list_people'))  # Redirect to the page listing all assignments or people
+
+# Edit Assignment
+@app.route('/edit_assignment/<int:assignment_id>', methods=['GET', 'POST'])
+def edit_assignment(assignment_id):
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    if request.method == 'POST':
+        start_date = request.form['start_date']
+        end_date = request.form['end_date']
+        cursor.execute("""
+            UPDATE Assignment 
+            SET StartDate = %s, EndDate = %s 
+            WHERE AssignmentID = %s
+        """, (start_date, end_date, assignment_id))
+        conn.commit()
+        conn.close()
+        return redirect(url_for('list_people'))  # Redirect to a relevant page
+    else:
+        cursor.execute("SELECT * FROM Assignment WHERE AssignmentID = %s", (assignment_id,))
+        assignment = cursor.fetchone()
+        conn.close()
+        return render_template('edit_assignment.html', assignment=assignment)
+
 
 # Run Flask application
 if __name__ == '__main__':

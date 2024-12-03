@@ -9,9 +9,12 @@
     <ul>
         {% for assignment in assignments %}
         <li>
-            {{ assignment['PlanetName'] }} - From {{ assignment['StartDate'] }} to {{ assignment['EndDate'] }}
-            <!-- Link to view all people assigned to the same location -->
-            (<a href="{{ url_for('location_assignments', location_id=assignment['LocationID']) }}">View Others</a>)
+             {{ assignment['PlanetName'] }} - From {{ assignment['StartDate'] }} to {{ assignment['EndDate'] }}
+             (<a href="{{ url_for('location_assignments', location_id=assignment['LocationID']) }}">View Others</a>)
+             <a href="{{ url_for('edit_assignment', assignment_id=assignment['AssignmentID']) }}">Edit</a>
+             <form action="{{ url_for('delete_assignment', assignment_id=assignment['AssignmentID']) }}" method="post" style="display:inline;">
+                 <button type="submit">Delete</button>
+             </form>
         </li>
         {% endfor %}
     </ul>
